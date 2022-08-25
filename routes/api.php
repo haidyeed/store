@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BabyController;
+
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,27 @@ Route::post('login', [UserController::class, 'login']);
 
 // put all api protected routes here
 Route::middleware('auth:api')->group(function () {
-    //User 
+    //User
     Route::get('user-details', [UserController::class, 'userDetails']);
     Route::post('logout', [UserController::class, 'logout']);
+
+    Route::apiResources([
+        'categories' => CategoryController::class,
+        'products' => ProductController::class,
+    ]);
+
+
+
+
+// Verb	     URI	        Action	           Route Name
+// GET	   /photos	       index	         photos.index     http://127.0.0.1:8000/api/categories
+// GET  	/photos/create	create	         photos.create
+// POST	    /photos     	store	          photos.store    http://127.0.0.1:8000/api/categories
+// GET	/photos/{photo}    	show           	photos.show
+// GET	/photos/{photo}/edit	edit	   photos.edit
+// PUT/PATCH	/photos/{photo}	update	   photos.update
+// DELETE	/photos/{photo}	   destroy	  photos.destroy
+
 
 
 });
